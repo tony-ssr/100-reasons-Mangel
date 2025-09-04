@@ -346,3 +346,28 @@ document.addEventListener('keydown', (e) => {
         handleFilterChange(categories[currentIndex - 1]);
     }
 });
+
+// Funcionalidad del botón de volver arriba
+function initializeBackToTop() {
+    const backToTopButton = document.getElementById('backToTop');
+    
+    // Mostrar/ocultar botón según el scroll
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('show');
+        } else {
+            backToTopButton.classList.remove('show');
+        }
+    });
+    
+    // Funcionalidad de scroll suave al hacer clic
+    backToTopButton.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
+
+// Inicializar el botón de volver arriba
+initializeBackToTop();
