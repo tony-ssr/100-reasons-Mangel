@@ -106,6 +106,7 @@ const reasons = [
 let currentFilter = 'all';
 const reasonsGrid = document.getElementById('reasonsGrid');
 const navButtons = document.querySelectorAll('.nav-btn');
+let displayTimeouts = []; // Array para almacenar los timeouts activos
 
 // Función para crear una tarjeta de razón
 function createReasonCard(reason) {
@@ -120,6 +121,11 @@ function createReasonCard(reason) {
 
 // Función para mostrar las razones filtradas
 function displayReasons(filter = 'all') {
+    // Limpiar timeouts pendientes
+    displayTimeouts.forEach(timeout => clearTimeout(timeout));
+    displayTimeouts = [];
+    
+    // Limpiar el grid
     reasonsGrid.innerHTML = '';
     
     let filteredReasons = reasons;
@@ -128,15 +134,17 @@ function displayReasons(filter = 'all') {
     }
     
     filteredReasons.forEach((reason, index) => {
-        setTimeout(() => {
+        const timeout = setTimeout(() => {
             const card = createReasonCard(reason);
             reasonsGrid.appendChild(card);
             
             // Agregar animación de entrada
-            setTimeout(() => {
+            const animationTimeout = setTimeout(() => {
                 card.classList.add('bounce-in');
             }, 50);
+            displayTimeouts.push(animationTimeout);
         }, index * 100); // Delay progresivo para efecto cascada
+        displayTimeouts.push(timeout);
     });
 }
 
