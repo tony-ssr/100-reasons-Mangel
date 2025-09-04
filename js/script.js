@@ -156,13 +156,7 @@ function handleFilterChange(filter) {
     displayReasons(filter);
 }
 
-// Event listeners para los botones de navegación
-navButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const category = button.dataset.category;
-        handleFilterChange(category);
-    });
-});
+// Event listeners para los botones de navegación se inicializan en DOMContentLoaded
 
 // Función para agregar efectos de hover a las imágenes de la galería
 function initializeGallery() {
@@ -309,6 +303,14 @@ function addSpecialMessages() {
 document.addEventListener('DOMContentLoaded', () => {
     // Mostrar todas las razones inicialmente
     displayReasons('all');
+    
+    // Inicializar event listeners para los botones de navegación
+    navButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const category = button.dataset.category;
+            handleFilterChange(category);
+        });
+    });
     
     // Inicializar efectos
     initializeGallery();
